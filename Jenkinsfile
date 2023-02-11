@@ -4,17 +4,17 @@ pipeline {
     stages{
         stage ('Git Checkout') {
             steps{
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ashaavi/multibranch1.git']])
+                echo 'this the git checkout stage'
             }
         }
-        stage ('terraform init') {
+        stage ('Test Stage') {
             steps {
-                sh 'terraform init'
+                echo 'This the test stage'
             }
         }
-        stage ('terraform apply') {
+        stage ('Deploy Stage') {
             steps {
-                sh 'terraform apply --auto-approve'
+                echo 'this the deploy stage'
             }
         }
     }
