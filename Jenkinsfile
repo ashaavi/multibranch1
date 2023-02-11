@@ -8,12 +8,10 @@ pipeline {
                  }
                  stage('Test') {
                  steps {
-                    input('this is test stage')
+                    echo 'this is test stage'
                  }
                  }
-                 stage('Deploy') {
-                  
-                       stage('Deploy start ') {
+                 stage('Deploy')
                            steps {
                                 echo 'this is deploy stage'
                            } 
