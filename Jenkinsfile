@@ -14,7 +14,7 @@ stages{
 }
     stage('Test'){
         steps{
-             withSonarQubeEnv('sonarque server'){
+             withSonarQubeEnv('admin'){
              sh 'mvn sonar:sonar'
              }
         }
