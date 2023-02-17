@@ -4,7 +4,7 @@ pipeline{
 stages{
     stage('Checkout'){
         steps{
-            git 'https://github.com/ashaavi/java-example.git'
+            git 'https://github.com/ashaavi/multibranch1.git'
         }
     }
     stage('Build'){
