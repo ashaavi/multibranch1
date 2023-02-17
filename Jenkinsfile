@@ -1,28 +1,24 @@
-pipeline { 
-  
-   agent any
+pipeline{
+    agent any
 
-   stages {
-   
-     stage('Install Dependencies') { 
-        steps { 
-           sh 'echo "installing dependencies"' 
+stages{
+    stage('Checkout'){
+        steps{
+            git 'https://github.com/ashaavi/java-example.git'
         }
-     }
-     
-     stage('Test') { 
-        steps { 
-           sh 'echo "testing application..."'
+    }
+    stage('Build'){
+       steps{
+           sh 'mvn clean install'
+       }
+}
+    stage('Test'){
+        steps{
+             withSonarQubeEnv('sonarque server'){
+             sh 'mvn sonar:sonar'
+             }
         }
-      }
+    }
 
-         stage("Deploy application") { 
-         steps { 
-           sh 'echo "deploying application..."'
-         }
-
-     }
-  
-   	}
-
-   }
+}
+}
