@@ -1,33 +1,25 @@
 pipeline{
     agent any
-
-stages{
-    stage('Checkout'){
-        steps{
-            git 'https://github.com/ashaavi/multibranch1.git'
-        }
-    }
-    stage('SonarQubeTest'){
-        steps{
-             withSonarQubeEnv('installationName: sonarQube'){
-             sh 'mvn clean test sonar:sonar -Dsonar.projectkey=sonar'
-             }
-        }
-    }
-        stage('Quality Gate'){
+    stages{
+        stage('Checkout'){
             steps{
-                timeout(time: 1, Unit: 'HOURS'){
-                    waitForQualityGate abortPipeline: true
-                }
+                git 'https://github.com/ashaavi/multibranch1.git'
+                
             }
         }
-        stage('Build'){
+        stage('Build Stage'){
             steps{
                 sh 'mvn clean install'
             }
         }
+        stage('Sonarqube Analysis'){
+            steps{
+                withSonarQubeEnv('sonarQube') {
+                    sh 'mvn clean test sonar:sonar -Dsonar.projectkeys=sonarj'
+    
+                }
+            }
+        }
     }
-
 }
-
-
+    
